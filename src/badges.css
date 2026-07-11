@@ -42,6 +42,14 @@
 }
 
 @media (max-width: 800px) {
+  .feature-large img {
+    width: 250px;
+    height: 500px;
+    bottom: -130px;
+    object-fit: cover;
+    object-position: top;
+  }
+
   .store-badges {
     margin-inline: auto;
     gap: 10px;
