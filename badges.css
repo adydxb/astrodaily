@@ -1,0 +1,49 @@
+.app {
+  position: relative;
+}
+
+.animated-stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.site-header,
+.app > main,
+.app > footer {
+  position: relative;
+  z-index: 1;
+}
+
+.download > img {
+  box-shadow: 0 0 90px rgba(106, 78, 225, .50);
+}
+
+.store-badges {
+  display: flex;
+  gap: 16px;
+  width: min(100%, 398px);
+  margin-top: 28px;
+}
+
+.store-badges button {
+  flex: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.store-badges img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 800px) {
+  .store-badges {
+    margin-inline: auto;
+    gap: 10px;
+  }
+}
