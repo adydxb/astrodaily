@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
+
 const shots = [
   ["WhatsApp Image 2026-07-11 at 11.01.48 AM.jpeg", "A complete daily horoscope, written for your sign."],
   ["WhatsApp Image 2026-07-11 at 11.02.02 AM.jpeg", "Your energy for love, career, health, and money."],
@@ -45,7 +47,7 @@ function Header({ onNavigate }) {
   const go = (page) => { setOpen(false); onNavigate(page); };
   return <header className="site-header">
     <button className="brand" onClick={() => go("home")} aria-label="AstroDaily home">
-      <img src="/assets/astrodaily-logo.png" alt="" /><span>AstroDaily</span>
+      <img src={asset("astrodaily-logo.png")} alt="" /><span>AstroDaily</span>
     </button>
     <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Open navigation"><span></span><span></span></button>
     <nav className={open ? "open" : ""}>
@@ -59,7 +61,7 @@ function Header({ onNavigate }) {
 
 function Footer({ onNavigate }) {
   return <footer>
-    <div className="footer-brand"><img src="/assets/astrodaily-logo.png" alt="" /><div><strong>AstroDaily</strong><span>Your day, written in the stars.</span></div></div>
+    <div className="footer-brand"><img src={asset("astrodaily-logo.png")} alt="" /><div><strong>AstroDaily</strong><span>Your day, written in the stars.</span></div></div>
     <div className="footer-links"><button onClick={() => onNavigate("privacy")}>Privacy</button><button onClick={() => onNavigate("terms")}>Terms</button><button onClick={() => onNavigate("support")}>Support</button></div>
     <p>© 2026 AstroDaily. For entertainment purposes only.</p>
   </footer>;
@@ -70,7 +72,7 @@ function Home({ onNavigate }) {
   return <>
     <main>
       <section className="hero">
-        <div className="hero-orbit" aria-hidden="true"><img src="/assets/astrodaily-logo.png" alt="" /></div>
+        <div className="hero-orbit" aria-hidden="true"><img src={asset("astrodaily-logo.png")} alt="" /></div>
         <div className="hero-copy">
           <div className="eyebrow"><span>✦</span> Personal astrology, every day</div>
           <h1>Your day, written<br/>in the <em>stars.</em></h1>
@@ -80,14 +82,14 @@ function Home({ onNavigate }) {
         </div>
         <div className="hero-phone">
           <div className="phone-glow"></div>
-          <div className="phone"><img src={`/assets/${shots[0][0]}`} alt="AstroDaily daily horoscope screen" /></div>
+          <div className="phone"><img src={asset(shots[0][0])} alt="AstroDaily daily horoscope screen" /></div>
           <span className="float-card card-one">Today’s energy <b>88%</b></span><span className="float-card card-two">Lucky number <b>44</b></span>
         </div>
       </section>
 
       <section className="intro" id="features"><div className="section-label">A universe in your pocket</div><h2>Guidance that feels<br/><em>made for you.</em></h2><p>AstroDaily brings the wisdom of astrology into a calm, intuitive experience you’ll want to return to every morning.</p></section>
       <section className="features-grid">
-        <article className="feature feature-large"><span className="feature-icon">01</span><h3>Daily horoscope</h3><p>A thoughtful, personalized reading to help you move through the day with clarity and intention.</p><img src={`/assets/${shots[0][0]}`} alt="Daily horoscope in AstroDaily" /></article>
+        <article className="feature feature-large"><span className="feature-icon">01</span><h3>Daily horoscope</h3><p>A thoughtful, personalized reading to help you move through the day with clarity and intention.</p><img src={asset(shots[0][0])} alt="Daily horoscope in AstroDaily" /></article>
         <article className="feature"><span className="feature-icon">02</span><h3>Energy insights</h3><p>See how love, career, health, and money align today.</p><div className="meter-list"><i><b>Love</b><span><u style={{width:"88%"}}></u></span><em>88%</em></i><i><b>Career</b><span><u style={{width:"92%"}}></u></span><em>92%</em></i><i><b>Health</b><span><u style={{width:"69%"}}></u></span><em>69%</em></i></div></article>
         <article className="feature"><span className="feature-icon">03</span><h3>Real compatibility</h3><p>Explore your connection with every sign through love, trust, passion, and communication.</p><div className="compatibility"><span>♈<small>You</small></span><b>83%<small>Strong potential</small></b><span>♌<small>Leo</small></span></div></article>
       </section>
@@ -96,7 +98,7 @@ function Home({ onNavigate }) {
         <div className="experience-copy"><div className="section-label">Designed for daily wonder</div><h2>Every insight,<br/><em>beautifully revealed.</em></h2><p>Move from your morning reading to the bigger picture. AstroDaily keeps every experience focused, personal, and effortless.</p>
           <div className="shot-tabs">{shots.map((shot, i) => <button key={shot[0]} className={active===i?"active":""} onClick={() => setActive(i)}><b>{String(i+1).padStart(2,"0")}</b><span>{shot[1]}</span></button>)}</div>
         </div>
-        <div className="showcase"><div className="phone"><img src={`/assets/${shots[active][0]}`} alt={shots[active][1]} /></div><div className="showcase-caption"><span>AstroDaily</span><p>{shots[active][1]}</p></div></div>
+        <div className="showcase"><div className="phone"><img src={asset(shots[active][0])} alt={shots[active][1]} /></div><div className="showcase-caption"><span>AstroDaily</span><p>{shots[active][1]}</p></div></div>
       </section>
 
       <section className="widgets">
@@ -108,13 +110,13 @@ function Home({ onNavigate }) {
       </section>
 
       <section className="languages">
-        <div className="language-visuals"><div className="language-phone language-phone-back"><img src="/assets/10-languages.jpeg" alt="AstroDaily language selector showing ten supported languages" /></div><div className="language-phone language-phone-front"><img src="/assets/language-home-screen.jpeg" alt="AstroDaily daily horoscope localized in Simplified Chinese" /></div></div>
+        <div className="language-visuals"><div className="language-phone language-phone-back"><img src={asset("10-languages.jpeg")} alt="AstroDaily language selector showing ten supported languages" /></div><div className="language-phone language-phone-front"><img src={asset("language-home-screen.jpeg")} alt="AstroDaily daily horoscope localized in Simplified Chinese" /></div></div>
         <div className="language-copy"><div className="section-label">Astrology speaks every language</div><h2>Your guidance,<br/><em>in your language.</em></h2><p>Enjoy the complete AstroDaily experience in 10 languages. From daily readings to compatibility and forecasts, every insight feels natural and personal.</p><div className="language-list"><span>English</span><span>العربية</span><span>Español</span><span>Français</span><span>हिन्दी</span><span>日本語</span><span>한국어</span><span>اردو</span><span>Tiếng Việt</span><span>简体中文</span></div></div>
       </section>
 
-      <section className="premium"><div><div className="section-label">AstroDaily Premium</div><h2>Go deeper into<br/>your <em>cosmic story.</em></h2><p>Unlock complete readings, long-range forecasts, detailed compatibility, your birth chart, and more—with no ads.</p><ul><li>Full daily reading</li><li>Weekly, monthly & yearly forecasts</li><li>Love compatibility report</li><li>Birth chart & lucky time</li></ul><a className="primary" href="#download">Explore Premium</a></div><div className="premium-visual"><img src={`/assets/${shots[4][0]}`} alt="AstroDaily premium features" /></div></section>
+      <section className="premium"><div><div className="section-label">AstroDaily Premium</div><h2>Go deeper into<br/>your <em>cosmic story.</em></h2><p>Unlock complete readings, long-range forecasts, detailed compatibility, your birth chart, and more—with no ads.</p><ul><li>Full daily reading</li><li>Weekly, monthly & yearly forecasts</li><li>Love compatibility report</li><li>Birth chart & lucky time</li></ul><a className="primary" href="#download">Explore Premium</a></div><div className="premium-visual"><img src={asset(shots[4][0])} alt="AstroDaily premium features" /></div></section>
 
-      <section className="download" id="download"><img src="/assets/download-logo.png" alt="AstroDaily zodiac moon logo" /><div><div className="section-label">Your stars are waiting</div><h2>Make every day<br/>feel <em>aligned.</em></h2><p>Start your personal astrology journey with AstroDaily.</p><div className="store-badges"><button onClick={() => alert("AstroDaily is coming soon to the App Store.")} aria-label="AstroDaily coming soon to the App Store"><img src="/assets/app-store.png" alt="Download on the App Store" /></button><button onClick={() => alert("AstroDaily is coming soon to Google Play.")} aria-label="AstroDaily coming soon to Google Play"><img src="/assets/google-play.png" alt="Get it on Google Play" /></button></div></div></section>
+      <section className="download" id="download"><img src={asset("download-logo.png")} alt="AstroDaily zodiac moon logo" /><div><div className="section-label">Your stars are waiting</div><h2>Make every day<br/>feel <em>aligned.</em></h2><p>Start your personal astrology journey with AstroDaily.</p><div className="store-badges"><button onClick={() => alert("AstroDaily is coming soon to the App Store.")} aria-label="AstroDaily coming soon to the App Store"><img src={asset("app-store.png")} alt="Download on the App Store" /></button><button onClick={() => alert("AstroDaily is coming soon to Google Play.")} aria-label="AstroDaily coming soon to Google Play"><img src={asset("google-play.png")} alt="Get it on Google Play" /></button></div></div></section>
     </main>
     <Footer onNavigate={onNavigate}/>
   </>;
@@ -217,5 +219,5 @@ export function App() {
   const [page,setPage]=useState(getPage());
   useEffect(()=>{const f=()=>{setPage(getPage());scrollTo(0,0)};addEventListener("hashchange",f);return()=>removeEventListener("hashchange",f)},[]);
   const navigate=(p)=>{location.hash=`#/${p}`;setPage(p);scrollTo(0,0)};
-  return <div className="app"><AnimatedStars/><Header onNavigate={navigate}/>{page==="home"?<Home onNavigate={navigate}/>:page==="support"?<Support onNavigate={navigate}/>:<LegalPage type={page==="terms"?"terms":"privacy"} onNavigate={navigate}/>}</div>;
+  return <div className="app" style={{ "--cosmic-background": `url(${asset("cosmic-background.jpg")})` }}><AnimatedStars/><Header onNavigate={navigate}/>{page==="home"?<Home onNavigate={navigate}/>:page==="support"?<Support onNavigate={navigate}/>:<LegalPage type={page==="terms"?"terms":"privacy"} onNavigate={navigate}/>}</div>;
 }
