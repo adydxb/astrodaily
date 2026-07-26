@@ -222,9 +222,24 @@ function AnimatedStars() {
 }
 
 export function App() {
-  const getPage=()=>location.hash.replace("#/","")||"home";
+  const getPage=()=>{
+    const path = location.pathname.replace(/^\/+|\/+$/g, "");
+    if (path === "privacy" || path === "support" || path === "terms") return path;
+    const hashPage = location.hash.replace(/^#\/?/, "");
+    return hashPage === "privacy" || hashPage === "support" || hashPage === "terms" ? hashPage : "home";
+  };
   const [page,setPage]=useState(getPage());
-  useEffect(()=>{const f=()=>{setPage(getPage());scrollTo(0,0)};addEventListener("hashchange",f);return()=>removeEventListener("hashchange",f)},[]);
-  const navigate=(p)=>{location.hash=`#/${p}`;setPage(p);scrollTo(0,0)};
+  useEffect(()=>{
+    const f=()=>{setPage(getPage());scrollTo(0,0)};
+    addEventListener("popstate",f);
+    addEventListener("hashchange",f);
+    return()=>{removeEventListener("popstate",f);removeEventListener("hashchange",f)};
+  },[]);
+  const navigate=(p)=>{
+    const nextPath = p === "home" ? "/" : `/${p}`;
+    history.pushState({}, "", nextPath);
+    setPage(p);
+    scrollTo(0,0);
+  };
   return <div className="app" style={{ "--cosmic-background": `url(${asset("cosmic-background.jpg")})` }}><AnimatedStars/><Header onNavigate={navigate}/>{page==="home"?<Home onNavigate={navigate}/>:page==="support"?<Support onNavigate={navigate}/>:<LegalPage type={page==="terms"?"terms":"privacy"} onNavigate={navigate}/>}</div>;
 }
