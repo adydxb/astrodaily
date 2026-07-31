@@ -10,64 +10,31 @@ const shots = [
   ["WhatsApp Image 2026-07-11 at 11.02.57 AM.jpeg", "Unlock a deeper, distraction-free experience."],
 ];
 
-const pageCopy = {
-  privacy: {
-    eyebrow: "Legal",
-    title: "Privacy Policy",
-    intro: "Your privacy matters to us. This policy explains what AstroDaily may collect, why it is used, and the choices available to you.",
-    sections: [
-      ["Information we collect", "AstroDaily may collect information you provide, such as your name, date of birth, zodiac preferences, and messages sent to support. We may also receive basic device, app performance, and usage information."],
-      ["How we use information", "We use information to personalize readings, provide compatibility and calendar features, improve app reliability, respond to support requests, and protect the service from misuse."],
-      ["Sharing and service providers", "We do not sell your personal information. Limited information may be processed by trusted service providers that help us operate, analyze, secure, or support AstroDaily, subject to appropriate safeguards."],
-      ["Data retention and security", "We keep information only for as long as needed for the purposes described here or to meet legal obligations. We use reasonable administrative and technical measures to protect it."],
-      ["Your choices", "You may update app profile details, limit device permissions, or contact us to request access, correction, or deletion where applicable. Some data may be retained when required by law."],
-      ["Children’s privacy", "AstroDaily is not directed to children under 13, and we do not knowingly collect personal information from children under 13."],
-      ["Changes to this policy", "We may update this policy as the app evolves. Material changes will be reflected here with a revised effective date."],
-    ],
-  },
-  terms: {
-    eyebrow: "Legal",
-    title: "Terms of Use",
-    intro: "These terms govern your use of AstroDaily. By using the app or website, you agree to these terms.",
-    sections: [
-      ["Using AstroDaily", "You may use AstroDaily for personal, non-commercial purposes in accordance with these terms and applicable laws. You are responsible for the information you provide and for keeping your device secure."],
-      ["Entertainment purpose", "Astrology readings, compatibility scores, forecasts, and related content are provided for entertainment and general reflection only. They are not medical, legal, financial, psychological, or other professional advice."],
-      ["Subscriptions and purchases", "Premium features may require a paid subscription or in-app purchase. Prices, billing periods, renewals, trials, cancellations, and refunds are handled through the app store shown at purchase and are subject to that store’s terms."],
-      ["Acceptable use", "You may not misuse, disrupt, reverse engineer, copy, resell, or attempt unauthorized access to AstroDaily, its content, or related systems."],
-      ["Intellectual property", "AstroDaily, its visual identity, original content, and software are owned by or licensed to us and are protected by applicable intellectual property laws."],
-      ["Availability and disclaimers", "We work to keep AstroDaily available and accurate, but the service is provided as available without guarantees that it will always be uninterrupted, error-free, or suitable for a particular purpose."],
-      ["Limitation of liability", "To the maximum extent permitted by law, we are not liable for indirect, incidental, special, or consequential losses arising from your use of, or inability to use, AstroDaily."],
-      ["Changes", "We may update the service or these terms. Continued use after an update means you accept the revised terms."],
-    ],
-  },
-};
-
-function Header({ onNavigate }) {
+function Header() {
   const [open, setOpen] = useState(false);
-  const go = (page) => { setOpen(false); onNavigate(page); };
   return <header className="site-header">
-    <button className="brand" onClick={() => go("home")} aria-label="AstroDaily home">
+    <a className="brand" href="/" aria-label="AstroDaily home" onClick={() => setOpen(false)}>
       <img src={asset("astrodaily-logo.png")} alt="" /><span>AstroDaily</span>
-    </button>
+    </a>
     <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Open navigation"><span></span><span></span></button>
     <nav className={open ? "open" : ""}>
-      <button onClick={() => go("home")}>Home</button>
-      <button onClick={() => { go("home"); setTimeout(() => document.getElementById("features")?.scrollIntoView({behavior:"smooth"}), 20); }}>Features</button>
-      <button onClick={() => go("support")}>Support</button>
-      <button className="nav-cta" onClick={() => { go("home"); setTimeout(() => document.getElementById("download")?.scrollIntoView({behavior:"smooth"}), 20); }}>Get the app</button>
+      <a href="/" onClick={() => setOpen(false)}>Home</a>
+      <button onClick={() => { setOpen(false); document.getElementById("features")?.scrollIntoView({behavior:"smooth"}); }}>Features</button>
+      <a href="/support/" onClick={() => setOpen(false)}>Support</a>
+      <button className="nav-cta" onClick={() => { setOpen(false); document.getElementById("download")?.scrollIntoView({behavior:"smooth"}); }}>Get the app</button>
     </nav>
   </header>;
 }
 
-function Footer({ onNavigate }) {
+function Footer() {
   return <footer>
     <div className="footer-brand"><img src={asset("astrodaily-logo.png")} alt="" /><div><strong>AstroDaily</strong><span>Your day, written in the stars.</span></div></div>
-    <div className="footer-links"><button onClick={() => onNavigate("privacy")}>Privacy</button><button onClick={() => onNavigate("terms")}>Terms</button><button onClick={() => onNavigate("support")}>Support</button></div>
+    <div className="footer-links"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/support/">Support</a></div>
     <p>© 2026 AstroDaily. For entertainment purposes only.</p>
   </footer>;
 }
 
-function Home({ onNavigate }) {
+function Home() {
   const [active, setActive] = useState(0);
   return <>
     <main>
@@ -118,26 +85,8 @@ function Home({ onNavigate }) {
 
       <section className="download" id="download"><img src={asset("download-logo.png")} alt="AstroDaily zodiac moon logo" /><div><div className="section-label">Your stars are waiting</div><h2>Make every day<br/>feel <em>aligned.</em></h2><p>Start your personal astrology journey with AstroDaily.</p><div className="store-badges"><button onClick={() => alert("AstroDaily is coming soon to the App Store.")} aria-label="AstroDaily coming soon to the App Store"><img src={asset("app-store.png")} alt="Download on the App Store" /></button><button onClick={() => alert("AstroDaily is coming soon to Google Play.")} aria-label="AstroDaily coming soon to Google Play"><img src={asset("google-play.png")} alt="Get it on Google Play" /></button></div></div></section>
     </main>
-    <Footer onNavigate={onNavigate}/>
+    <Footer/>
   </>;
-}
-
-function LegalPage({ type, onNavigate }) {
-  const page = pageCopy[type];
-  return <><main className="subpage"><section className="subpage-hero"><div className="eyebrow">✦ {page.eyebrow}</div><h1>{page.title}</h1><p>{page.intro}</p><span>Effective July 11, 2026</span></section><section className="legal-card">{page.sections.map(([title, text],i)=><article key={title}><b>{String(i+1).padStart(2,"0")}</b><div><h2>{title}</h2><p>{text}</p></div></article>)}<div className="legal-contact">Questions about these terms? <button onClick={()=>onNavigate("support")}>Contact support</button>.</div></section></main><Footer onNavigate={onNavigate}/></>;
-}
-
-function Support({ onNavigate }) {
-  const [sent,setSent]=useState(false);
-  const supportEmail="support@astrodailyapp.com";
-  const submit=(e)=>{
-    e.preventDefault();
-    const data=new FormData(e.currentTarget);
-    const body=`Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`;
-    window.location.href=`mailto:${supportEmail}?subject=AstroDaily%20Support&body=${encodeURIComponent(body)}`;
-    setSent(true);
-  };
-  return <><main className="subpage support-page"><section className="subpage-hero"><div className="eyebrow">✦ We’re here to help</div><h1>How can we<br/><em>support you?</em></h1><p>Find a quick answer below or send us a message. We’ll get back to you as soon as possible.</p></section><section className="support-layout"><div className="faq"><div className="section-label">Frequently asked</div>{[["How do I manage my subscription?","Subscriptions are managed through the Apple App Store or Google Play account used to purchase AstroDaily."],["How do I update my birth details?","Open Profile in the app to update your name, birth date, time, location, or zodiac preferences."],["Can I restore a Premium purchase?","Yes. Open the Premium screen and choose Restore Purchases while signed in to the original app store account."],["How is my horoscope created?","AstroDaily combines your profile details with astrological patterns to create personalized, reflective content for entertainment." ]].map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div><div className="contact-card"><div className="section-label">Contact us</div><h2>Send a message</h2><p>Prefer email? Reach us directly at <a href={`mailto:${supportEmail}`}>{supportEmail}</a>.</p>{sent?<div className="success"><b>Message ready ✦</b><p>Your email app will open so you can send your note to AstroDaily support.</p><a className="primary" href={`mailto:${supportEmail}?subject=AstroDaily%20Support`}>Open email app</a></div>:<form onSubmit={submit}><label>Name<input name="name" required placeholder="Your name"/></label><label>Email<input name="email" required type="email" placeholder="you@example.com"/></label><label>How can we help?<textarea name="message" required rows="5" placeholder="Tell us what happened..."/></label><button className="primary" type="submit">Send message</button></form>}</div></section></main><Footer onNavigate={onNavigate}/></>;
 }
 
 function AnimatedStars() {
@@ -171,6 +120,7 @@ function AnimatedStars() {
         alpha: Math.random() * 0.55 + 0.3,
         pulse: Math.random() * Math.PI * 2,
       }));
+      if (reducedMotion) draw();
     };
 
     const draw = () => {
@@ -222,24 +172,5 @@ function AnimatedStars() {
 }
 
 export function App() {
-  const getPage=()=>{
-    const path = location.pathname.replace(/^\/+|\/+$/g, "");
-    if (path === "privacy" || path === "support" || path === "terms") return path;
-    const hashPage = location.hash.replace(/^#\/?/, "");
-    return hashPage === "privacy" || hashPage === "support" || hashPage === "terms" ? hashPage : "home";
-  };
-  const [page,setPage]=useState(getPage());
-  useEffect(()=>{
-    const f=()=>{setPage(getPage());scrollTo(0,0)};
-    addEventListener("popstate",f);
-    addEventListener("hashchange",f);
-    return()=>{removeEventListener("popstate",f);removeEventListener("hashchange",f)};
-  },[]);
-  const navigate=(p)=>{
-    const nextPath = p === "home" ? "/" : `/${p}`;
-    history.pushState({}, "", nextPath);
-    setPage(p);
-    scrollTo(0,0);
-  };
-  return <div className="app" style={{ "--cosmic-background": `url(${asset("cosmic-background.jpg")})` }}><AnimatedStars/><Header onNavigate={navigate}/>{page==="home"?<Home onNavigate={navigate}/>:page==="support"?<Support onNavigate={navigate}/>:<LegalPage type={page==="terms"?"terms":"privacy"} onNavigate={navigate}/>}</div>;
+  return <div className="app" style={{ "--cosmic-background": `url(${asset("cosmic-background.jpg")})` }}><AnimatedStars/><Header/><Home/></div>;
 }
