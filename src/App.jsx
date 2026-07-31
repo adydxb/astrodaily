@@ -3,11 +3,12 @@ import { useEffect, useRef, useState } from "react";
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 
 const shots = [
-  ["WhatsApp Image 2026-07-11 at 11.01.48 AM.jpeg", "A complete daily horoscope, written for your sign."],
-  ["WhatsApp Image 2026-07-11 at 11.02.02 AM.jpeg", "Your energy for love, career, health, and money."],
-  ["WhatsApp Image 2026-07-11 at 11.02.17 AM.jpeg", "See the chemistry between any two zodiac signs."],
-  ["WhatsApp Image 2026-07-11 at 11.02.35 AM.jpeg", "Explore the days, weeks, and months ahead."],
-  ["WhatsApp Image 2026-07-11 at 11.02.57 AM.jpeg", "Unlock a deeper, distraction-free experience."],
+  ["astrodaily-today-horoscope.png", "A daily theme, overall score, and complete horoscope for your sign."],
+  ["astrodaily-daily-ratings.png", "Daily ratings for love, career, money, health, mood, luck, and overall energy."],
+  ["astrodaily-compatibility.png", "See how your sign aligns with any partner sign."],
+  ["astrodaily-calendar.png", "Explore your personalized guidance across the calendar."],
+  ["astrodaily-languages.png", "Choose from 10 languages and personalize the app theme."],
+  ["astrodaily-reminders-premium.png", "Set a daily reminder and explore every Premium feature."],
 ];
 
 function Header() {
@@ -45,20 +46,20 @@ function Home() {
           <h1>Your day, written<br/>in the <em>stars.</em></h1>
           <p>Personalized horoscopes, meaningful compatibility, and cosmic guidance—beautifully designed for your everyday life.</p>
           <div className="hero-actions"><a className="primary" href="#download">Discover AstroDaily</a><a className="secondary" href="#experience">Explore the app</a></div>
-          <div className="trust-row"><span>✦ Daily guidance</span><span>✦ 12 zodiac signs</span><span>✦ Private by design</span></div>
+          <div className="trust-row"><span>✦ Daily guidance</span><span>✦ 10 languages</span><span>✦ Private by design</span></div>
         </div>
         <div className="hero-phone">
           <div className="phone-glow"></div>
           <div className="phone"><img src={asset(shots[0][0])} alt="AstroDaily daily horoscope screen" /></div>
-          <span className="float-card card-one">Today’s energy <b>88%</b></span><span className="float-card card-two">Lucky number <b>44</b></span>
+          <span className="float-card card-one">Overall today <b>7.7</b></span><span className="float-card card-two">Today’s theme <b>Quiet Progress</b></span>
         </div>
       </section>
 
       <section className="intro" id="features"><div className="section-label">A universe in your pocket</div><h2>Guidance that feels<br/><em>made for you.</em></h2><p>AstroDaily brings the wisdom of astrology into a calm, intuitive experience you’ll want to return to every morning.</p></section>
       <section className="features-grid">
-        <article className="feature feature-large"><span className="feature-icon">01</span><h3>Daily horoscope</h3><p>A thoughtful, personalized reading to help you move through the day with clarity and intention.</p><img src={asset(shots[0][0])} alt="Daily horoscope in AstroDaily" /></article>
-        <article className="feature"><span className="feature-icon">02</span><h3>Energy insights</h3><p>See how love, career, health, and money align today.</p><div className="meter-list"><i><b>Love</b><span><u style={{width:"88%"}}></u></span><em>88%</em></i><i><b>Career</b><span><u style={{width:"92%"}}></u></span><em>92%</em></i><i><b>Health</b><span><u style={{width:"69%"}}></u></span><em>69%</em></i></div></article>
-        <article className="feature"><span className="feature-icon">03</span><h3>Real compatibility</h3><p>Explore your connection with every sign through love, trust, passion, and communication.</p><div className="compatibility"><span>♈<small>You</small></span><b>83%<small>Strong potential</small></b><span>♌<small>Leo</small></span></div></article>
+        <article className="feature feature-large"><span className="feature-icon">01</span><h3>Daily horoscope</h3><p>Start with today’s theme and overall score, then read personalized guidance made for your sign.</p><img src={asset(shots[0][0])} alt="AstroDaily today screen with theme, overall score, and daily horoscope" /></article>
+        <article className="feature"><span className="feature-icon">02</span><h3>Daily ratings</h3><p>See how love, career, money, health, mood, luck, and your overall energy align today.</p><div className="meter-list"><i><b>Love</b><span><u style={{width:"93%"}}></u></span><em>93%</em></i><i><b>Career</b><span><u style={{width:"50%"}}></u></span><em>50%</em></i><i><b>Health</b><span><u style={{width:"91%"}}></u></span><em>91%</em></i><i><b>Money</b><span><u style={{width:"75%"}}></u></span><em>75%</em></i></div></article>
+        <article className="feature"><span className="feature-icon">03</span><h3>Real compatibility</h3><p>Compare any two zodiac signs, then unlock a detailed look at love, communication, trust, and passion.</p><div className="compatibility"><span>♏<small>You</small></span><b>70%<small>Promising match</small></b><span>♈<small>Aries</small></span></div></article>
       </section>
 
       <section className="experience" id="experience">
@@ -69,19 +70,19 @@ function Home() {
       </section>
 
       <section className="widgets">
-        <div className="widgets-copy"><div className="section-label">Your stars, at a glance</div><h2>Cosmic guidance<br/><em>on your Home Screen.</em></h2><p>Stay connected to your day without opening the app. AstroDaily widgets bring your horoscope and energy insights directly to your Home Screen.</p><div className="widget-benefits"><span>Live daily insights</span><span>Beautiful at every size</span><span>Always one glance away</span></div></div>
+        <div className="widgets-copy"><div className="section-label">Your stars, at a glance</div><h2>Cosmic guidance<br/><em>on your Home Screen.</em></h2><p>Stay connected to your day without opening the app. Choose a compact energy widget or a larger view with your horoscope and daily ratings.</p><div className="widget-benefits"><span>Today’s horoscope at a glance</span><span>Love, career, health, and money ratings</span><span>Available in compact and full sizes</span></div></div>
         <div className="widget-stage">
-          <div className="widget-wide"><div className="widget-top"><span className="widget-mark">AD</span><span>Saturday, July 11</span><b>Aries</b></div><div className="widget-wide-body"><div><small>DAILY HOROSCOPE</small><h3>Take the initiative.</h3><p>Your ideas are ready for action. Focus on one clear priority and let momentum carry you forward.</p></div><strong>♈</strong></div></div>
-          <div className="widget-square"><div className="energy-orb"><span>TODAY’S</span><b>ENERGY</b><em>84%</em></div><div className="energy-categories"><i><span>Love</span><b>88%</b></i><i><span>Career</span><b>92%</b></i><i><span>Health</span><b>69%</b></i><i><span>Money</span><b>87%</b></i></div></div>
+          <img className="widget-image widget-image-wide" src={asset("astrodaily-widget-large.png")} alt="Large AstroDaily Home Screen widget with horoscope and energy ratings" />
+          <img className="widget-image widget-image-square" src={asset("astrodaily-widget-small.png")} alt="Compact AstroDaily Home Screen widget with today's energy" />
         </div>
       </section>
 
       <section className="languages">
-        <div className="language-visuals"><div className="language-phone language-phone-back"><img src={asset("10-languages.jpeg")} alt="AstroDaily language selector showing ten supported languages" /></div><div className="language-phone language-phone-front"><img src={asset("language-home-screen.jpeg")} alt="AstroDaily daily horoscope localized in Simplified Chinese" /></div></div>
-        <div className="language-copy"><div className="section-label">Astrology speaks every language</div><h2>Your guidance,<br/><em>in your language.</em></h2><p>Enjoy the complete AstroDaily experience in 10 languages. From daily readings to compatibility and forecasts, every insight feels natural and personal.</p><div className="language-list"><span>English</span><span>العربية</span><span>Español</span><span>Français</span><span>हिन्दी</span><span>日本語</span><span>한국어</span><span>اردو</span><span>Tiếng Việt</span><span>简体中文</span></div></div>
+        <div className="language-visuals"><div className="language-phone language-phone-back"><img src={asset(shots[5][0])} alt="AstroDaily notification settings and Premium features" /></div><div className="language-phone language-phone-front"><img src={asset(shots[4][0])} alt="AstroDaily language selector showing ten supported languages" /></div></div>
+        <div className="language-copy"><div className="section-label">Astrology speaks every language</div><h2>Your guidance,<br/><em>in your language.</em></h2><p>Enjoy AstroDaily in 10 languages, choose a visual theme, and set a daily horoscope reminder for the time that suits you.</p><div className="language-list"><span>English</span><span>العربية</span><span>Español</span><span>Français</span><span>हिन्दी</span><span>日本語</span><span>한국어</span><span>اردو</span><span>Tiếng Việt</span><span>简体中文</span></div></div>
       </section>
 
-      <section className="premium"><div><div className="section-label">AstroDaily Premium</div><h2>Go deeper into<br/>your <em>cosmic story.</em></h2><p>Unlock complete readings, long-range forecasts, detailed compatibility, your birth chart, and more—with no ads.</p><ul><li>Full daily reading</li><li>Weekly, monthly & yearly forecasts</li><li>Love compatibility report</li><li>Birth chart & lucky time</li></ul><a className="primary" href="#download">Explore Premium</a></div><div className="premium-visual"><img src={asset(shots[4][0])} alt="AstroDaily premium features" /></div></section>
+      <section className="premium"><div><div className="section-label">AstroDaily Premium</div><h2>Go deeper into<br/>your <em>cosmic story.</em></h2><p>Unlock complete readings, long-range forecasts, detailed compatibility, your birth chart, lucky time, daily affirmations, and more.</p><ul><li>Full daily reading</li><li>Weekly, monthly & yearly forecasts</li><li>Love compatibility report</li><li>Birth chart & lucky time</li><li>Daily affirmation</li><li>Deep insights</li></ul><a className="primary" href="#download">Explore Premium</a></div><div className="premium-visual"><img src={asset(shots[5][0])} alt="AstroDaily reminder settings and Premium feature list" /></div></section>
 
       <section className="download" id="download"><img src={asset("download-logo.png")} alt="AstroDaily zodiac moon logo" /><div><div className="section-label">Your stars are waiting</div><h2>Make every day<br/>feel <em>aligned.</em></h2><p>Start your personal astrology journey with AstroDaily.</p><div className="store-badges"><button onClick={() => alert("AstroDaily is coming soon to the App Store.")} aria-label="AstroDaily coming soon to the App Store"><img src={asset("app-store.png")} alt="Download on the App Store" /></button><button onClick={() => alert("AstroDaily is coming soon to Google Play.")} aria-label="AstroDaily coming soon to Google Play"><img src={asset("google-play.png")} alt="Get it on Google Play" /></button></div></div></section>
     </main>

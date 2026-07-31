@@ -1,59 +1,63 @@
-# Design QA
+# AstroDaily Website Design QA
 
-- Source visual truth paths: `public/assets/WhatsApp Image 2026-07-11 at 11.01.48 AM.jpeg` through `…11.02.57 AM.jpeg`, plus `public/assets/astrodaily-logo.png`.
-- Implementation: `http://localhost:4173/` (production build via `npx vite preview`).
-- Intended viewports: desktop 1440 × 900 and mobile 390 × 844.
-- Intended state: home page, default app-showcase selection.
-- Primary interactions intended for testing: navigation, app screenshot selector, FAQ accordions, support form success state, and mobile menu.
+## Evidence
 
-## Verification method
+- Source visual truth: `D:\Github\AstroDaily Screeshots\IMG_4470.PNG` through `IMG_4477.PNG`.
+- Source dimensions: app captures `IMG_4470.PNG`–`IMG_4475.PNG` are 1206 × 2622 px (approximately a 402 × 874 CSS-pixel phone screen at 3× density); widget captures are 601 × 641 px and 1206 × 1256 px.
+- Browser-rendered implementation screenshots:
+  - `D:\Codex\astrodaily-site-update\home-desktop-viewport.png` (1425 × 990 px capture; requested 1440 × 1000 viewport).
+  - `D:\Codex\astrodaily-site-update\home-mobile-hero.png` and `home-mobile-feature.png` (375 × 812 px captures; browser reported 390 × 844 CSS viewport).
+  - `D:\Codex\astrodaily-site-update\home-widget-stage.png`, `home-languages.png`, and `home-premium.png`.
+  - `D:\Codex\astrodaily-site-update\privacy-mobile.png`, `terms-mobile.png`, and `support-mobile.png`.
+- State: dark cosmic marketing site; Today screen selected in the hero; Daily Ratings selected in the interactive showcase; Privacy, Terms, and Support inspected in their default states; one Support FAQ expanded.
+- Density normalization: source phone captures were assessed at their native 3× density and as proportionally scaled `<img>` assets in the responsive phone frames. Website captures were evaluated at browser output density without upscaling.
 
-Screenshot capture remained unavailable — the browser pane does not composite frames in this environment, so no pixel comparison against the source screenshots was possible. **The source-versus-render visual comparison is still outstanding.**
+## Full-view comparison
 
-In its place, the layout claims that the previous iteration could only guess at were verified by **measuring computed geometry and computed styles in the live page** (`getBoundingClientRect`, `getComputedStyle`, `matchMedia`, `documentElement.scrollWidth`). That is stronger evidence than a screenshot for overflow, stacking, and contrast, and weaker for typography, spacing rhythm, and colour harmony. Both are recorded honestly below.
+The current app capture and the rendered homepage were opened together in one comparison view. The website uses the supplied capture directly, preserves its aspect ratio and legibility, and places it within the existing AstroDaily phone treatment without recreating or altering app-owned content. The dark navy, violet, and gold marketing palette remains visually consistent with the source captures.
 
-## Observed results
+## Focused region comparison
 
-Routes — all served 200: `/`, `/privacy/`, `/terms/`, `/support/`.
-Console — **zero** errors or warnings across all four routes. All asset requests 200/304.
+- Hero and Daily Horoscope: the source Today screen, including Today’s Theme, 7.7 overall score, and horoscope content, is sharp and correctly cropped in the hero and feature card.
+- Screenshot showcase: all six current app screenshots are present; switching to Daily Ratings updates both the selected control and displayed capture.
+- Widgets: both supplied widget captures are used as real assets, preserve their aspect ratios, and remain inside the widget stage at desktop and mobile widths.
+- Languages, reminders, and Premium: the Profile captures are paired in the existing phone composition without clipping important labels.
+- Mobile feature card: the 250 × 500 px crop leaves the explanatory text unobstructed and matches the requested responsive treatment.
 
-| Check | Viewport | Result |
-|---|---|---|
-| Horizontal overflow, home | 390 × 844 | none (`scrollWidth` 390 = `innerWidth`) |
-| Horizontal overflow, /privacy/, /terms/, /support/ | 390 × 844 | none |
-| Terms header, 4 nav items | 390 × 844 | nav wraps to a 2nd row; header grows 72 → **79px**; nav fits inside header, not clipped |
-| Header stacking vs content | 1440 × 900 | `.site-header` z-index **20**, `.app > main` z-index **1** — header correctly above |
-| Header/footer nav anchors | 1440 × 900 | all 5 render `rgb(198,191,216)`, `text-decoration: none` — no default blue/underline |
-| Showcase caption clipping | 1000 × 900 | fully visible, 50px clearance (previously clipped ~11px) |
-| Showcase caption flourish | 1440 × 900 | `right: -35px` active, 134px clearance — design intent preserved |
-| Menu button tap target | 390 × 844 | **47 × 44px** — meets the 44px guideline |
-| Footer copyright contrast | all | `rgb(138,131,152)` = `#8a8398` → **5.50:1** on `#080713` (was 3.04:1, failed AA) |
-| Effective-date line contrast | /privacy/ | `#8a8398` → 5.50:1 (was `#6e677d`, 3.71:1) |
-| Static support page | 390 × 844 | no `<form>` present, 4 FAQ `<details>` — matches its stated no-web-form policy |
+## Required fidelity surfaces
 
-Note: `.hero-orbit` extends past the right viewport edge at 390px. This is the intentional decorative orbit, `aria-hidden`, clipped by `.app{overflow:hidden}` — not overflow, and it produces no scrollbar.
+- Fonts and typography: existing DM Sans and Playfair Display hierarchy remains coherent; screenshot text stays raster-sharp and is not re-typeset.
+- Spacing and layout rhythm: desktop sections retain the established grid and spacing. At 390 × 844 CSS px, every section remains within the viewport; document client width and scroll width are both 375 px, so there is no horizontal overflow.
+- Colors and visual tokens: the existing navy panels, lavender display accent, gold highlights, borders, and shadows remain consistent with both the previous site and the new app captures.
+- Image quality and asset fidelity: all eight supplied assets load with non-zero natural dimensions. No supplied product asset was replaced by CSS, SVG, emoji, or placeholder art.
+- Copy and content: marketing copy now reflects Today’s Theme, overall score, seven Daily Ratings categories, compatibility, calendar, 10 languages, themes, reminders, Premium features, and compact/full widgets.
+- Accessibility: product images have descriptive alt text, navigation remains semantic, the screenshot selector uses buttons, reduced motion is respected, and mobile content does not overlap.
 
 ## Findings
 
-- Resolved this pass: duplicate/contradictory legal + support content, invalid deploy workflow, header z-index override, reduced-motion canvas resize bug, three WCAG AA contrast failures, caption clipping, mobile header overflow, missing favicon and social card. See `AUDIT-CSS.md` for the stylesheet audit.
+- No actionable P0, P1, or P2 visual mismatches remain.
+- P3: the static legal-page navigation is compact at the narrowest mobile width, but links remain readable and usable. This is acceptable for the current non-redesign scope.
 
-- [P2] Still open — **stylesheet drift between `src/styles.css` and `public/legal.css`.** The two sheets disagree on `--gold` (`#f4c65b` vs `#e7c46a`), `--lav`, `--muted`, `--line`, body font (DM Sans vs Inter), and `.subpage h1` (sans vs Georgia serif). A visitor moving between the app and the legal pages sees accents shift hue and the H1 switch family. Deliberately left alone — picking the winner is a design decision.
+## Interaction and runtime checks
 
-- [P2] Still open — **landing-page image weight, 4.2MB.** `astrodaily-logo.png` is 1254 × 1254 at 1.93MB but renders ~32px in the header; `download-logo.png` is 1042 × 1042 at 2.28MB. A lossless re-encode was tested and came out *larger*, so the weight is inherent to the dimensions, not to poor compression. Same-dimension WebP measures 168KB for the logo (−91%). Also affects `og:image`, which should be ~1200 × 630 rather than a 1.9MB square.
-
-## Implementation checklist
-
-- [x] Test all header/footer routes.
-- [x] Test the mobile header at 390px on every static page.
-- [x] Check console errors.
-- [x] Verify stacking, contrast, overflow, and tap targets by computed style.
-- [ ] Capture home at 1440 × 900 and 390 × 844 as images — **still blocked**, no compositing.
-- [ ] Complete source-screenshot-versus-render comparison — **still blocked**, depends on the above.
-- [ ] Test the five-state screenshot selector and FAQ expansion interactively.
+- Tested the six-item screenshot selector; the Daily Ratings state displayed the correct capture.
+- Expanded a Support FAQ successfully.
+- Verified all 14 homepage images loaded successfully.
+- Checked browser console errors: none.
+- Verified Privacy, Terms, and Support content at mobile width.
+- Production build completed successfully with Vite.
 
 ## Comparison history
 
-- Iteration 1: browser navigation to the local server returned a connection error; nothing could be captured or measured.
-- Iteration 2 (this pass): production build served on `:4173`; all four routes reachable. Screenshots still unavailable, so verification moved to computed-geometry measurement. Twelve layout/contrast/stacking claims verified against the live DOM; two visual-design items deliberately left open above.
+- Initial comparison: no P0/P1/P2 issues found after the supplied assets and current product copy were integrated, so no corrective visual iteration was required.
 
-final result: verified by measurement; pixel comparison still blocked
+## Implementation checklist
+
+- [x] Use all eight supplied current app and widget captures.
+- [x] Preserve existing website layout and styling.
+- [x] Update current product feature claims.
+- [x] Update Privacy Policy, Terms of Use, and Support information.
+- [x] Verify desktop and mobile rendering, interactions, images, and console.
+- [x] Verify the production build.
+
+final result: passed

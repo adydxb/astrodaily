@@ -53,6 +53,23 @@
   border-radius: 38px;
 }
 
+.widget-image {
+  display: block;
+  height: auto;
+  border: 1px solid rgba(204, 184, 255, 0.24);
+  border-radius: 30px;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.42);
+}
+
+.widget-image-wide {
+  width: 100%;
+}
+
+.widget-image-square {
+  width: 44%;
+  align-self: flex-end;
+}
+
 .widget-wide,
 .widget-square {
   background: rgba(27, 20, 52, 0.96);
@@ -215,6 +232,14 @@
   .widget-stage {
     padding: 24px 16px;
     border-radius: 28px;
+  }
+
+  .widget-image {
+    border-radius: 22px;
+  }
+
+  .widget-image-square {
+    width: 52%;
   }
 
   .widget-wide {
